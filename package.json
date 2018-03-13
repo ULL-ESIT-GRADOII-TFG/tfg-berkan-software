@@ -1,0 +1,11 @@
+{
+  "name": "software",
+  "version": "1.0.0",
+  "description": "Repo conteniendo el software del TFG de Berkan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
