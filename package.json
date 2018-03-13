@@ -1,11 +1,30 @@
 {
-  "name": "software",
+  "name": "NONAMEYET",
   "version": "1.0.0",
-  "description": "Repo conteniendo el software del TFG de Berkan",
-  "main": "index.js",
+  "description": "Repository that contains the software of Berkan's Final Proyect.",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron app.js"
+  },
+  "repositorio": {
+    "tipo": "git",
+    "url": " git + https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan-software"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan/#readme",
+  "devDependencies": {
+    "electron": "^1.8.3",
+    "standard": "*"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "pug": "^2.0.1"
+  }
 }
