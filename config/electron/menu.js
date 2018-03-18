@@ -8,7 +8,7 @@ const Menu = electron.Menu
 /* This template got an array with diffrent options
 in the topside menu. */
 let template = [{
-  // Edit option.
+  // Edit option. template[0].
   label: 'Edit',
   submenu: [{
     label: 'Undo',
@@ -36,6 +36,51 @@ let template = [{
     label: 'Select All',
     accelerator: 'CmdOrCtrl+A',
     role: 'selectall'
+  }]
+}, {
+  // View option. template[1].
+  label: 'View',
+  submenu: [{
+    label: 'Reload',
+    accelerator: 'CmdOrCtrl+R',
+    // If click 'Reload' execute Electro Function that reload the app.
+    click: function (item, focusedWindow) {
+      if (focusedWindow) {
+        focusedWindow.reload()
+      }
+    }
+  }, {
+    label: 'Toggle Full Screen',
+    accelerator: (function () {
+      // For toggle full screen in MacOS.
+      if (process.platform === 'darwin') {
+        return 'Ctrl+Command+F'
+      } else {
+        return 'F11'
+      }
+    })(),
+    click: function (item, focusedWindow) {
+      if (focusedWindow) {
+        focusedWindow.setFullScreen(!focusedWindow.isFullScreen())
+      }
+    }
+  }, {
+    label: 'Toggle Developer Tools',
+    accelerator: (function () {
+      // For toggle developer tools in mac.
+      if (process.platform === 'darwin') {
+        return 'Alt+Command+I'
+      } else {
+        return 'Ctrl+Shift+I'
+      }
+    })(),
+    click: function (item, focusedWindow) {
+      if (focusedWindow) {
+        focusedWindow.toggleDevTools()
+      }
+    }
+  }, {
+    type: 'separator'
   }]
   // Here goes more options.
 }]
