@@ -2,6 +2,8 @@
 
 const electron = require('electron')
 const mainwindow = require('./config/electron/window')
+const menu = require('./config/electron/menu')
+const Menu = electron.Menu  
 const app = electron.app // Module to control application life.
 
 /* This method will be called when Electron has finished 

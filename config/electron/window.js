@@ -4,7 +4,7 @@ const electron = require('electron')
 const path = require('path')
 const url = require('url')
 const app = electron.app // Module to control application life.
-const BrowserWindow = electron.BrowserWindow // Module to create native browser window.
+const BrowserWindow = electron.BrowserWindow // Module to create native. browser window.
 
 let win // Necessary Keep a global reference of the window object.
 
@@ -29,7 +29,7 @@ function createWindow() {
 
   // Emitted when the window is closed.
   win.on('closed', function () {
-    // Dereference the window object, usually you would store windows
+    // Dereference the window object, usually you would store windows.
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     win = null
