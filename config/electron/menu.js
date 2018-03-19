@@ -102,7 +102,7 @@ let template = [{
   submenu: [{
     label: 'Learn More',
     click: function () {
-      electron.shell.openExternal('http://electron.atom.io')
+      electron.shell.openExternal('https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan')
     }
   }]
 }]
@@ -116,6 +116,12 @@ if (process.platform === 'darwin') {
     submenu: [{
       label: `About ${name}`,
       role: 'about'
+    }, {
+      label: 'View License',
+      role: 'help',
+      click: function () {
+        electron.shell.openExternal('https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan/blob/master/LICENSE')
+      }
     }, {
       type: 'separator'
     }, {
@@ -145,6 +151,27 @@ if (process.platform === 'darwin') {
       }
     }]
   })
+  
+  // Adds options for MacOS Window menu.
+  template[1].submenu.push(
+    {type: 'separator'},
+    {
+      label: 'Speech',
+      submenu: [
+        {role: 'startspeaking'},
+        {role: 'stopspeaking'}
+      ]
+    }
+  )
+
+  // Adds options for MacOS Window menu
+  template[3].submenu = [
+    {role: 'close'},
+    {role: 'minimize'},
+    {role: 'zoom'},
+    {type: 'separator'},
+    {role: 'front'}
+  ]
 }
 
 /* Set topside menu with Electron Menu Functions. */
