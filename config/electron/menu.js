@@ -83,6 +83,7 @@ let template = [{
     type: 'separator'
   }]
 }, {
+  // Window option. template[2].
   label: 'Window',
   role: 'window',
   submenu: [{
@@ -94,11 +95,20 @@ let template = [{
     accelerator: 'CmdOrCtrl+W',
     role: 'close'
   }]
-  // Here goes more options.
+}, {
+  // Help option. template[3].
+  label: 'Help',
+  role: 'help',
+  submenu: [{
+    label: 'Learn More',
+    click: function () {
+      electron.shell.openExternal('http://electron.atom.io')
+    }
+  }]
 }]
 
 /* If got MacOS system is necessary create this option
-to menu or it doesnt work. */
+to topside menu or it doesnt work. */
 if (process.platform === 'darwin') {
   const name = electron.app.getName()
   template.unshift({
@@ -135,9 +145,7 @@ if (process.platform === 'darwin') {
       }
     }]
   })
-
 }
-
 
 /* Set topside menu with Electron Menu Functions. */
 app.on('ready', function () {
