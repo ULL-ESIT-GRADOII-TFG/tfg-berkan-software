@@ -1,4 +1,4 @@
-# Project Title
+# AutoCheck for GhClassrooms.
 
 This project is an alternative to "ghshell", a Node.js package that offers an interaction with Github as if you were using your command line simulating a tree structure that provides all the options at your level in the tree Github account or your organization.
 
