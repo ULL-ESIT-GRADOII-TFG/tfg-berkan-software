@@ -19,7 +19,7 @@
   "homepage": "https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan/#readme",
   "devDependencies": {
     "electron": "^1.8.3",
-    "standard": "*"
+    "standard": "^11.0.1"
   },
   "dependencies": {
     "cookie-parser": "^1.4.3",

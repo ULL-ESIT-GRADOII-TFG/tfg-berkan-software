@@ -1,6 +1,6 @@
 'use strict'
 
-const electron = require('electron') 
+const electron = require('electron')
 const path = require('path')
 const url = require('url')
 const app = electron.app // Module to control application life.
@@ -10,11 +10,11 @@ let win // Necessary Keep a global reference of the window object.
 
 /* Function to create the mainwindow of the electron app
 The function is exported to use when electron is inicializate in app.js. */
-function createWindow() {
+function createWindow () {
   win = new BrowserWindow({ // Create the window.
-    title: "App Title",
+    title: 'App Title',
     width: 1281,
-    height: 800, 
+    height: 800,
     minWidth: 1281,
     minHeight: 800,
     backgroundColor: '#312450'
@@ -35,7 +35,7 @@ function createWindow() {
     win = null
   })
 }
-  
+
 app.on('activate', function () {
   /* On OS X it's common to re-create a window in the app when the
   dock icon is clicked and there are no other windows open. */
@@ -43,5 +43,5 @@ app.on('activate', function () {
     createWindow()
   }
 })
-  
+
 module.exports.createWindow = createWindow

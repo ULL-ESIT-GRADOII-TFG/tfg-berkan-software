@@ -1,8 +1,7 @@
 'use strict'
 
-const electron = require('electron') 
+const electron = require('electron')
 const app = electron.app // Module to control application life.
-const BrowserWindow = electron.BrowserWindow // Module to create native. browser window.
 const Menu = electron.Menu
 
 /* This template got an array with diffrent options
@@ -151,7 +150,7 @@ if (process.platform === 'darwin') {
       }
     }]
   })
-  
+
   // Adds options for MacOS Window menu.
   template[1].submenu.push(
     {type: 'separator'},
@@ -179,4 +178,3 @@ app.on('ready', function () {
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
 })
-
