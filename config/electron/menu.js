@@ -3,6 +3,8 @@
 const electron = require('electron')
 const app = electron.app // Module to control application life.
 const Menu = electron.Menu
+const openAboutWindow = require('about-window').default
+// const path = require('path')
 
 /* This template got an array with diffrent options
 in the topside menu. */
@@ -114,7 +116,14 @@ if (process.platform === 'darwin') {
     label: name,
     submenu: [{
       label: `About ${name}`,
-      role: 'about'
+      role: 'about',
+      click: () =>
+        openAboutWindow({
+          // icon_path: path.join(__dirname, 'icon.png'),
+          copyright: 'Copyright (c) 2015 rhysd',
+          package_json_dir: __dirname,
+          open_devtools: process.env.NODE_ENV !== 'production'
+        })
     }, {
       label: 'View License',
       role: 'help',

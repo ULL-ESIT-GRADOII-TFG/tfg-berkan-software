@@ -22,6 +22,7 @@
     "standard": "^11.0.1"
   },
   "dependencies": {
+    "about-window": "^1.11.0",
     "electron-pug": "^1.5.1",
     "pug": "^2.0.1"
   }
