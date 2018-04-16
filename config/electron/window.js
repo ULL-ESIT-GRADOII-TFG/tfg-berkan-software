@@ -5,6 +5,7 @@ const path = require('path')
 const url = require('url')
 const app = electron.app // Module to control application life.
 const BrowserWindow = electron.BrowserWindow // Module to create native. browser window.
+require('electron-pug')({pretty: true})
 
 let win // Necessary Keep a global reference of the window object.
 
@@ -16,13 +17,12 @@ function createWindow () {
     width: 1281,
     height: 800,
     minWidth: 1281,
-    minHeight: 800,
-    backgroundColor: '#312450'
+    minHeight: 800
   //  icon: path.join(__dirname, 'assets/icons/png/64x64.png')
   })
   // Load the index.html of the app.
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, '../../resources/views/login.pug'),
     protocol: 'file:',
     slashes: true
   }))

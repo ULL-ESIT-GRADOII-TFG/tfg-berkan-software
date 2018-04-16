@@ -22,9 +22,7 @@
     "standard": "^11.0.1"
   },
   "dependencies": {
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
+    "electron-pug": "^1.5.1",
     "pug": "^2.0.1"
   }
 }
