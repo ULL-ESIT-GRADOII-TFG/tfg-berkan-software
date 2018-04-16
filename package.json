@@ -2,10 +2,10 @@
   "name": "NONAMEYET",
   "version": "1.0.0",
   "description": "Repository that contains the software of Berkan's Final Proyect.",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron app.js"
+    "start": "electron main.js"
   },
   "repositorio": {
     "tipo": "git",

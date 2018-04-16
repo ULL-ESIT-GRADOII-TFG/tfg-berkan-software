@@ -12,7 +12,7 @@ let win // Necessary Keep a global reference of the window object.
 The function is exported to use when electron is inicializate in app.js. */
 function createWindow () {
   win = new BrowserWindow({ // Create the window.
-    title: 'App Title',
+    title: 'AutoCheck',
     width: 1281,
     height: 800,
     minWidth: 1281,

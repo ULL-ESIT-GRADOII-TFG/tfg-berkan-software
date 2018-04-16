@@ -174,7 +174,9 @@ if (process.platform === 'darwin') {
 }
 
 /* Set topside menu with Electron Menu Functions. */
-app.on('ready', function () {
+function createMenu () {
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
-})
+}
+
+module.exports.createMenu = createMenu

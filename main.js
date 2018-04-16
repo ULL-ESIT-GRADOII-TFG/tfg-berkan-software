@@ -2,13 +2,16 @@
 
 const electron = require('electron')
 const mainwindow = require('./config/electron/window')
-const menu = require('./config/electron/menu')
+const topsidemenu = require('./config/electron/menu')
 const app = electron.app // Module to control application life.
 
 /* This method will be called when Electron has finished
 initialization and is ready to create browser windows.
 Call the function imported from window.js */
 app.on('ready', mainwindow.createWindow)
+
+/* Set topside menu with Electron Menu Functions. */
+app.on('ready', topsidemenu.createMenu)
 
 /* Quit when all windows are closed. */
 app.on('window-all-closed', function () {
