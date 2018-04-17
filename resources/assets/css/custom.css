@@ -2,33 +2,68 @@
   font-family: 'Oxygen', sans-serif;
   color: black;
 }
-body {
-  background-image: url(../img/stars.jpg);
-  background-position: center center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
+
+body, html {
+	height: 100%;
+	background-repeat: no-repeat;    /*background-image: linear-gradient(rgb(12, 97, 33),rgb(104, 145, 162));*/
+	background:white;
+	position: relative;
 }
 
 @font-face {
   font-family: 'Oxygen', sans-serif;
-  color: black;
+  color: white;
 }
 
 #container-autocheck {
+  border: 1px solid black;
+  margin-top: -10px;
   text-align: center;
   transform: translateY(50px);
   font-family: 'Oxygen', sans-serif;
-  font-size: 92pt;
+  font-size: 60pt;
   overflow: hidden;
   -webkit-animation: typing 3s steps(21, end),blink-caret .5s step-end infinite alternate;
-
+  animation: typing 3s steps(21, end),blink-caret .5s step-end infinite alternate;
 }
 
 #slogan-autocheck {
-  transform: translateX(420px);
   font-size: 18pt;
+  text-align: center;
+  border: 1px solid black;
+}
+
+#content {
+  transform: translateY(15%);
+  z-index:3;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: white;
+  text-align: center;
+  border-top: 2px solid black;
 }
 
 /***** Media queries *****/
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+@media (min-width: 768px) and (max-width: 991px) {}
+
+@media (max-width: 767px) {
+  .inner-bg {
+    padding: 60px 0 110px 0;
+  }
+}
+
+@media (max-width: 415px) {
+  h1, h2 {
+    font-size: 32px;
+  }
+}
 @-webkit-keyframes typing { from { width: 0; } }
+@-webkit-keyframes blink-caret { 50% { border-color: transparent; } }
