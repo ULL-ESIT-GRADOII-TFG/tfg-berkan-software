@@ -1,0 +1,71 @@
+
+body
+    .wrapper
+        // top navbar
+        header.topnavbar-wrapper
+            // START Top Navbar
+            nav.navbar.topnavbar(role='navigation')
+                // START navbar header
+                .navbar-header
+                    a.navbar-brand(href='#/')
+                        .brand-logo
+                            img.img-responsive(src="", alt='App Logo')
+                        .brand-logo-collapsed
+                            img.img-responsive(src="", alt='App Logo')
+                // END navbar header
+                // START Nav wrapper
+                .nav-wrapper
+                    // START Left navbar
+                    ul.nav.navbar-nav
+                        li
+                            // Button used to collapse the left sidebar. Only visible on tablet and desktops
+                            a.hidden-xs(href='#', data-trigger-resize='', data-toggle-state='aside-collapsed')
+                                em.fa.fa-bars
+                            // Button to show/hide the sidebar on mobile. Visible on mobile only.
+                            a.visible-xs.sidebar-toggle(href='#', data-toggle-state='aside-toggled', data-no-persist='true')
+                                em.fa.fa-bars
+                        // START User avatar toggle
+                        li
+                            // Button used to collapse the left sidebar. Only visible on tablet and desktops
+                            a#user-block-toggle(href='#user-block', data-toggle='collapse')
+                                em.icon-user
+                        li
+                            a(href="")
+                                em.icon-logout
+                        // END User avatar toggle
+                    // END Left navbar
+                    
+                    // START Right Navbar
+                    ul.nav.navbar-nav.navbar-right
+                        // Search icon
+                        li
+                            a(href='#', data-search-open='')
+                                em.icon-magnifier
+                    // END Right Navbar
+                // END Nav wrapper
+            // END Top Navbar
+
+        // sidebar
+        aside.aside
+            // START Sidebar (left)
+            .aside-inner
+                nav.sidebar(data-sidebar-anyclick-close='')
+                    // START sidebar nav
+                    ul.nav
+                        // Iterates over all sidebar items
+                        li.nav-heading
+                            span(data-localize='sidebar.heading.HEADER') 
+                                ='Menú'
+                        li
+                            a(href="", title='Inicio')
+                                em.icon-user
+                                span(data-localize='sidebar.nav.INICIO') 
+                                    ='Inicio'
+                        // END sidebar nav
+                    // END Sidebar (left)
+                // offsidebar
+
+        section
+            =''
+        
+

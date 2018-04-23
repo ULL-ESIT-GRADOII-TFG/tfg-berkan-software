@@ -1,6 +1,5 @@
 * {
   font-family: 'Oxygen', sans-serif;
-  color: black;
 }
 
 body, html {
@@ -12,11 +11,9 @@ body, html {
 
 @font-face {
   font-family: 'Oxygen', sans-serif;
-  color: white;
 }
 
 #container-autocheck {
-  border: 1px solid black;
   margin-top: -10px;
   text-align: center;
   transform: translateY(50px);
@@ -30,7 +27,6 @@ body, html {
 #slogan-autocheck {
   font-size: 18pt;
   text-align: center;
-  border: 1px solid black;
 }
 
 #content {
@@ -44,7 +40,7 @@ body, html {
   bottom: 0;
   width: 100%;
   background-color: white;
-  color: white;
+  color: black;
   text-align: center;
   border-top: 2px solid black;
 }
