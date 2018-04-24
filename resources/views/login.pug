@@ -24,9 +24,11 @@ body
                             .form-group.has-feedback
                                 input.form-control(type="password")
                                 span.fa.fa-lock.form-control-feedback.text-muted
-                            button.btn.btn-block.btn-primary.mt-lg(type="button") Inicia sesión
+                            button.btn.btn-block.btn-primary.mt-lg(type="button", onclick="login()") Inicia sesión
                 .p-lg.text-center
                     span &copy; 2018 AutoCheck
+script
+    include ../renderers/oauth_render.js
 
 include layouts/footer.pug
 

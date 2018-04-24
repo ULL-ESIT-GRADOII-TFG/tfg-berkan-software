@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "about-window": "^1.11.0",
+    "electron-oauth2": "^3.0.0",
     "electron-pug": "^1.5.1",
     "pug": "^2.0.1"
   }
