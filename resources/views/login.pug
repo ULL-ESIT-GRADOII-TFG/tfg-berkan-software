@@ -13,18 +13,11 @@ body
             .block-center.mt-xl.wd-xl
                 .panel-x.panel-flat
                     .panel-heading.text-center
-                        a(href="#")
-                            img(src="", alt="")
                     .panel-body
                         p.text-center.pv  INICIA SESIÓN PARA CONTINUAR
-                        form.mb-lg(action="POST") 
-                            .form-group.has-feedback
-                                input.form-control(type="email")
-                                span.fa.fa-envelope.form-control-feedback.text-muted
-                            .form-group.has-feedback
-                                input.form-control(type="password")
-                                span.fa.fa-lock.form-control-feedback.text-muted
-                            button.btn.btn-block.btn-primary.mt-lg(type="button", onclick="login()") Inicia sesión
+                            a.btn-block.btn-social.btn-lg.btn-github(type="button")
+                                i.fa.fa-github
+                                ="Sign in with GitHub"
                 .p-lg.text-center
                     span &copy; 2018 AutoCheck
 script
