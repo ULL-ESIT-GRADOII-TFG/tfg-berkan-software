@@ -451,7 +451,7 @@ body {
   margin-bottom: 20px;
   padding: 15px;
   font-weight: normal;
-  background-color: #268dc1;
+  background-color: rgb(37,41,46);
   border-bottom: 1px solid #cfdbe2;
 }
 .content-wrapper > h3 > small,
@@ -493,7 +493,7 @@ body {
   }
   .wrapper > section,
   .wrapper > footer {
-    margin-left: 220px;
+    margin-left: 
   }
   .wrapper > section.has-sidebar-right {
     margin-right: 240px;
@@ -1225,7 +1225,7 @@ _:-ms-lang(x),
   }
   .topnavbar .navbar-nav > li > a,
   .topnavbar .navbar-nav > .open > a {
-    color: #ffffff;
+    color: rgb(37,41,46);
   }
   .topnavbar .navbar-nav > li > a:hover,
   .topnavbar .navbar-nav > .open > a:hover,

@@ -16,6 +16,9 @@ const windowParams = {
     nodeIntegration: false
   }
 }
+const options = {
+  scope: ['read:user', 'repo', 'admin:org', 'admin:org_hook', 'delete_repo']
+}
 const githubOAuth = electronOauth2(oauthConfig, windowParams)
 /// /// OAUTH
 
@@ -38,7 +41,7 @@ app.on('ready', topsidemenu.createMenu)
 
 /* Function called from ipc.renderer to githuboauth in login. */
 ipcMain.on('github-oauth', (event, arg) => {
-  githubOAuth.getAccessToken({})
+  githubOAuth.getAccessToken(options)
     .then(token => {
       event.sender.send('github-oauth-reply', token)
     }, err => {
