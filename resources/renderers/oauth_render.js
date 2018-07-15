@@ -1,6 +1,10 @@
 const electron = require('electron')
-const ipc = electron.ipcRenderer
+const ipcRender = electron.ipcRenderer
 
 function OAuthLogin () {
-  ipc.send('github-oauth', 'getToken')
+  ipcRender.send('github-oauth', 'getToken')
+  
+  ipcRender.on('github-oauth-reply', (event, arg) => {
+    window.location.href = '../views/index.pug'; 
+  })
 }

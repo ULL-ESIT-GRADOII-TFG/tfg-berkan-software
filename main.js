@@ -2,7 +2,7 @@
 
 const electron = require('electron')
 const app = electron.app // Module to control application life.
-const ipc = electron.ipcMain
+const ipcMain = electron.ipcMain
 const mainwindow = require('./config/electron/window')
 const topsidemenu = require('./config/electron/menu')
 
@@ -37,7 +37,7 @@ app.on('window-all-closed', function () {
 app.on('ready', topsidemenu.createMenu)
 
 /* Function called from ipc.renderer to githuboauth in login. */
-ipc.on('github-oauth', (event, arg) => {
+ipcMain.on('github-oauth', (event, arg) => {
   githubOAuth.getAccessToken({})
     .then(token => {
       event.sender.send('github-oauth-reply', token)
