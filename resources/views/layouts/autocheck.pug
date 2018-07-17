@@ -18,12 +18,14 @@ body
                     // START Left navbar
                     ul.nav.navbar-nav
                         li
-                            // Button used to collapse the left sidebar. Only visible on tablet and desktops
+                            a(href = "../views/index.pug")
+                                em.icon-home
+                        li
                             a(href = "../views/profile.pug")
                                 em.icon-user
-                        
-                          
-                        // END User avatar toggle
+                        li
+                            a(href = "../views/dashboard.pug")
+                                em.icon-docs
                     // END Left navbar
                     
                     // START Right Navbar
@@ -31,6 +33,7 @@ body
                       li
                           a(href="")
                               em.icon-logout
+
                     // END Right Navbar
                 // END Nav wrapper
             // END Top Navbar

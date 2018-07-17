@@ -410,7 +410,6 @@ body {
   margin-left: 0;
   z-index: 111;
   background-color: #f5f7fa;
-  margin-bottom: 60px !important;
 }
 .wrapper > footer {
   position: absolute;
@@ -493,7 +492,7 @@ body {
   }
   .wrapper > section,
   .wrapper > footer {
-    margin-left: 
+
   }
   .wrapper > section.has-sidebar-right {
     margin-right: 240px;
