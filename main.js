@@ -90,3 +90,15 @@ ipcMain.on('github-oauth', (event, arg) => {
       console.log('Error while getting token', err)
     })
 })
+
+ipcMain.on('render-index', (event, arg) => {
+  viewRenderer.load(win, 'index')
+})
+
+ipcMain.on('render-profile', (event, arg) => {
+  viewRenderer.load(win, 'profile')
+})
+/* Function called from ipc.renderer to render index. */
+/* Function called from ipc.renderer to render profile. */
+/* Function called from ipc.renderer to render dashboard. */
+
