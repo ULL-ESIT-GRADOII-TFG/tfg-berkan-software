@@ -91,14 +91,14 @@ ipcMain.on('github-oauth', (event, arg) => {
     })
 })
 
+/* Function called from ipc.renderer to render index. */
 ipcMain.on('render-index', (event, arg) => {
   viewRenderer.load(win, 'index')
 })
 
+/* Function called from ipc.renderer to render profile. */
 ipcMain.on('render-profile', (event, arg) => {
   viewRenderer.load(win, 'profile')
 })
-/* Function called from ipc.renderer to render index. */
-/* Function called from ipc.renderer to render profile. */
 /* Function called from ipc.renderer to render dashboard. */
 
