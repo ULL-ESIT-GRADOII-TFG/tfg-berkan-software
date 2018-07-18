@@ -1,0 +1,34 @@
+<%- include('layouts/head'); -%>
+
+<body>
+    <div class="container" id="container-autocheck" style="z-index:23;">
+        <div class="row">
+            <div class="col-lg-12"> AutoCheck
+                <p id="slogan-autocheck"> ¡Fácil y sencillo, gestiona tus Classrooms!</p>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="content">
+        <div class="wrapper">
+            <div class="block-center mt-xl wd-xl">
+                <div class="panel-x panel-flat">
+                    <div class="panel-heading text-center"><a href="#"><img src="" alt=""/></a></div>
+                    <div class="panel-body">
+                        <p class="text-center pv"> INICIA SESIÓN PARA CONTINUAR</p>
+                        <form class="mb-lg" action="POST"> <button class="btn-block btn-lg btn-github bg-inverse" type="button" onclick="OAuthLogin()"><i class="fa fa-github fa-lg"></i> Sign in with GitHub</button></form>
+                    </div>
+                </div>
+                <div class="p-lg text-center"><span>&copy; 2018 AutoCheck</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="asset://js/renderers/oauth_render.js"></script>
+
+<%- include('layouts/footer'); -%>
+
+
+
+
+
