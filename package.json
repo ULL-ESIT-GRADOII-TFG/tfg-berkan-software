@@ -26,6 +26,7 @@
     "about-window": "^1.11.0",
     "electron-oauth2": "^3.0.0",
     "electron-pug": "^1.5.1",
+    "electron-view-renderer": "^1.2.4",
     "pug": "^2.0.1"
   }
 }
