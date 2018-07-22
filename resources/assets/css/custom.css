@@ -43,6 +43,12 @@ footer {
   text-align: center;
 }
 
+.fixed-panel {
+  min-height: 400px;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
 /***** Media queries *****/
 @media (min-width: 992px) and (max-width: 1199px) {}
 

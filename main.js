@@ -100,5 +100,14 @@ ipcMain.on('render-index', (event, arg) => {
 ipcMain.on('render-profile', (event, arg) => {
   viewRenderer.load(win, 'profile')
 })
-/* Function called from ipc.renderer to render dashboard. */
 
+/* Function called from ipc.renderer to render orgs. */
+ipcMain.on('render-orgs', (event, arg) => {
+  viewRenderer.load(win, 'orgs')
+})
+
+/* Function called from ipc.renderer to render orgs assignments. */
+ipcMain.on('render-assigns', (event, arg) => {
+  viewRenderer.load(win, 'assigns')
+})
+ 

@@ -1,0 +1,57 @@
+<%- include('layouts/head'); -%>
+
+<%- include('layouts/autocheck'); -%>
+    
+<div class="content-wrapper">
+  <div class="content-heading">
+      <div class="row">
+          <div class="col-lg-12">
+              <h1>Organizations</h1>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-lg-3"></div>
+      </div>
+      <h4>List your Orgs.</h4>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default" style="border:1px solid #b3b3b3;">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-lg-4">
+                  <h3>Orgs</h3>
+              </div>
+            </div>
+          </div>
+          <div class="panel-body fixed-panel">
+            <% for(var i=0; i < 10; i++) { %>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="panel panel-default" style="border:1px solid #b3b3b3;">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-lg-4">
+                            <a role="button" onclick="AssignsRender()"><h4>Org1</h3></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <% } %>
+
+          </div>
+        </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+          
+<footer><span>&copy; 2018 AutoCheck</span></footer>
+
+<%- include('layouts/footer'); -%>
