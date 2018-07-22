@@ -27,6 +27,7 @@
     "electron-oauth2": "^3.0.0",
     "electron-pug": "^1.5.1",
     "electron-view-renderer": "^1.2.4",
+    "file-system": "^2.2.2",
     "pug": "^2.0.1"
   }
 }

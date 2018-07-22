@@ -8,6 +8,7 @@ const path = require('path')
 const url = require('url')
 const BrowserWindow = electron.BrowserWindow // Module to create native. browser window.
 const ElectronViewRenderer = require('electron-view-renderer')
+const fs = require('fs'); 
 
 /// /// OAUTH
 const oauthConfig = require('./config/electron/oauth').oauth
@@ -80,11 +81,22 @@ app.on('window-all-closed', function () {
 /* Set topside menu with Electron Menu Functions. */
 app.on('ready', topsidemenu.createMenu)
 
-/* Function called from ipc.renderer to githuboauth in login. */
+/* Function called from ipc.renderer to githuboauth in login. */ 
 ipcMain.on('github-oauth', (event, arg) => {
   githubOAuth.getAccessToken(options)
     .then(token => {
-      usertoken = token
+      // Save the user token in json file.
+      let user_token = {  
+          access_token: token.access_token,
+          token_type: token.token_type, 
+          scope: token.scope,
+      };
+
+      let data = JSON.stringify(token);  
+      fs.writeFileSync('token.json', data); 
+      console.log(data);
+      
+      // Render index view.
       viewRenderer.load(win, 'index')
     }, err => {
       console.log('Error while getting token', err)
