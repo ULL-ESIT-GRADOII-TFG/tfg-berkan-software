@@ -1,38 +1,57 @@
 <%- include('layouts/head'); -%>
 
 <%- include('layouts/autocheck'); -%>
-    
+
+<% var user = user; %>
+
 <div class="content-wrapper">
   <div class="content-heading">
       <div class="row">
           <div class="col-lg-12">
-              <h1>Usuario</h1>
+              <h1><%= user.login %></h1>
           </div>
       </div>
       <div class="row">
           <div class="col-lg-3"></div>
       </div>
-      <h4>Perfil de Github</h4>
+      <p>Github Profile</p>
   </div>
   <div class="container">
       <div class="row">
           <div class="panel panel-default">
               <div class="panel-body text-center">
-                  <div class="pv-lg"><img class="center-block img-responsive img-circle img-thumbnail thumb96" src="img/user/02.jpg" alt="Contact" /></div>
-                  <h3 class="m0 text-bold">Username</h3>
+                  <div class="pv-lg">
+                    <img class="center-block img-responsive img-circle img-thumbnail thumb96" src="<%= user.avatar_url %>" alt="Contact" />
+                  </div>
+                  <h3 class="m0 text-bold"> <%= user.login %> </h3> 
                   <div class="mv-lg">
                       <p></p>
                   </div>
                   <div class="text-center"></div>
                   <form class="form-horizontal">
+                    <div class="col-sm-2"></div>
                       <div class="form-group"><label class="col-sm-2 control-label" for="inputContact1">Name</label>
-                          <div class="col-sm-10"><input class="form-control" id="inputContact1" type="text" placeholder="" value="" readonly="readonly" /></div>
+                          <div class="col-sm-4">
+                            <input class="form-control" id="inputContact1" type="text" placeholder="" value="<%= user.name %>" readonly="readonly" />
+                          </div>
                       </div>
+                      <div class="col-sm-2"></div>
                       <div class="form-group"><label class="col-sm-2 control-label" for="inputContact2">Email</label>
-                          <div class="col-sm-10"><input class="form-control" id="inputContact2" type="email" value="" readonly="readonly" /></div>
+                          <div class="col-sm-4">
+                            <input class="form-control" id="inputContact2" type="email" value="<%= user.email %>" readonly="readonly" />
+                          </div>
                       </div>
+                      <div class="col-sm-2"></div>
+                      <div class="form-group"><label class="col-sm-2 control-label" for="inputContact5">Location</label>
+                          <div class="col-sm-4">
+                            <input class="form-control" id="inputContact5" type="text" value="<%= user.location %>" readonly="readonly" />
+                          </div>
+                      </div>
+                      <div class="col-sm-2"></div>
                       <div class="form-group"><label class="col-sm-2 control-label" for="inputContact5">Website</label>
-                          <div class="col-sm-10"><input class="form-control" id="inputContact5" type="text" value="" readonly="readonly" /></div>
+                          <div class="col-sm-4">
+                            <input class="form-control" id="inputContact5" type="text" value="<%= user.html_url %>" readonly="readonly" />
+                          </div>
                       </div>
                   </form>
               </div>

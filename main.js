@@ -7,6 +7,8 @@ const topsidemenu = require('./config/electron/menu')
 const path = require('path')
 const url = require('url')
 const BrowserWindow = electron.BrowserWindow // Module to create native. browser window.
+const GithubApiFunctionsClass = require('./app/githubfunctions')
+const GithubApiFunctions = GithubApiFunctionsClass.GithubApiFunctions
 const ElectronViewRenderer = require('electron-view-renderer')
 const fs = require('fs'); 
 
@@ -24,6 +26,7 @@ const options = {
   scope: ['read:user', 'repo', 'admin:org', 'admin:org_hook', 'delete_repo']
 }
 const githubOAuth = electronOauth2(oauthConfig, windowParams)
+let ghUser = null
 /// /// OAUTH
 
 /// /// RENDERER
@@ -38,7 +41,6 @@ viewRenderer.use('ejs')
 /// /// RENDERER
 
 let win // Necessary Keep a global reference of the window object.
-let usertoken // Variable who got the user access token.
 
 /* Function to create the mainwindow of the electron app
 The function is exported to use when electron is inicializate in app.js. */
@@ -81,7 +83,7 @@ app.on('window-all-closed', function () {
 /* Set topside menu with Electron Menu Functions. */
 app.on('ready', topsidemenu.createMenu)
 
-/* Function called from ipc.renderer to githuboauth in login. */ 
+/* Function called from ipc.renderer to githuboauth in login. */
 ipcMain.on('github-oauth', (event, arg) => {
   githubOAuth.getAccessToken(options)
     .then(token => {
@@ -91,10 +93,12 @@ ipcMain.on('github-oauth', (event, arg) => {
           token_type: token.token_type, 
           scope: token.scope,
       };
-
       let data = JSON.stringify(token);  
-      fs.writeFileSync('token.json', data); 
-      console.log(data);
+      
+      if (!fs.existsSync('config/.autocheck/')) {
+        fs.mkdirSync('config/.autocheck/')
+      }
+      fs.writeFileSync('config/.autocheck/token.json', data); 
       
       // Render index view.
       viewRenderer.load(win, 'index')
@@ -110,7 +114,14 @@ ipcMain.on('render-index', (event, arg) => {
 
 /* Function called from ipc.renderer to render profile. */
 ipcMain.on('render-profile', (event, arg) => {
-  viewRenderer.load(win, 'profile')
+  let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+  let user = JSON.parse(rawdata); 
+  ghUser = new GithubApiFunctions(user.access_token)
+  let result = ghUser.userProfile()
+  
+  result.then(({data, headers, status}) => {
+    viewRenderer.load(win, 'profile', {user: data})
+  })  
 })
 
 /* Function called from ipc.renderer to render orgs. */
