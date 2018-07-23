@@ -23,7 +23,7 @@ const windowParams = {
   }
 }
 const options = {
-  scope: ['read:user', 'repo', 'admin:org', 'admin:org_hook', 'delete_repo']
+  scope: ['read:user', 'repo', 'admin:org']
 }
 const githubOAuth = electronOauth2(oauthConfig, windowParams)
 let ghUser = null
@@ -126,7 +126,15 @@ ipcMain.on('render-profile', (event, arg) => {
 
 /* Function called from ipc.renderer to render orgs. */
 ipcMain.on('render-orgs', (event, arg) => {
-  viewRenderer.load(win, 'orgs')
+  let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+  let user = JSON.parse(rawdata); 
+  ghUser = new GithubApiFunctions(user.access_token)
+  let result = ghUser.userOrgs()
+  
+  result.then(({data, headers, status}) => {
+    console.log(data);
+    viewRenderer.load(win, 'orgs', {orgs: data})
+  })  
 })
 
 /* Function called from ipc.renderer to render orgs assignments. */

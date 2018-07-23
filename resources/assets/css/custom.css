@@ -44,8 +44,8 @@ footer {
 }
 
 .fixed-panel {
-  min-height: 400px;
-  max-height: 600px;
+  min-height: 300px;
+  max-height: 400px;
   overflow-y: scroll;
 }
 
