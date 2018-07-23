@@ -10,7 +10,7 @@ function indexRender () {
   ipcRender.send('render-index', 'index')
 }
 
-function AssignsRender (orgName) {
-  ipcRender.send('render-assigns', orgName)
+function AssignmentsRender (orgName) {
+  ipcRender.send('render-assignments', orgName)
   console.log(orgName);
 }

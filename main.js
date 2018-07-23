@@ -137,7 +137,12 @@ ipcMain.on('render-orgs', (event, arg) => {
 })
 
 /* Function called from ipc.renderer to render orgs assignments. */
-ipcMain.on('render-assigns', (event, arg) => {
-  viewRenderer.load(win, 'assigns', {orgName: arg})
+ipcMain.on('render-assignments', (event, arg) => {
+  viewRenderer.load(win, 'assignment', {orgName: arg})
 })
  
+ 
+/* Function called from ipc.renderer to render orgs assignments. */
+ipcMain.on('new-assigns', (event, arg) => {
+  viewRenderer.load(win, 'assigns', {orgName: arg})
+})
