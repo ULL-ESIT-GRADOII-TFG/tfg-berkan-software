@@ -142,7 +142,20 @@ ipcMain.on('render-assignments', (event, arg) => {
 })
  
  
-/* Function called from ipc.renderer to render orgs assignments. */
-ipcMain.on('new-assigns', (event, arg) => {
-  viewRenderer.load(win, 'assigns', {orgName: arg})
+/* Function called from ipc.renderer to create org assignments. */
+ipcMain.on('render-newassignment', (event, arg) => {
+  let assignments = {
+    assignments: []
+  };
+  
+  if (fs.existsSync('config/.autocheck/'+arg[0]+'.json')) {
+    let rawdata = fs.readFileSync('config/.autocheck/'+arg[0]+'.json');  
+    assignments = JSON.parse(rawdata); //now it an object
+  }
+    
+  assignments.assignments.push({name: arg[1], regex: arg[2]}); //add some data
+  let data = JSON.stringify(assignments); //convert it back to json
+  fs.writeFileSync('config/.autocheck/'+arg[0]+'.json', data);
+    
+  viewRenderer.load(win, 'assignment', {orgName: arg[0]})
 })

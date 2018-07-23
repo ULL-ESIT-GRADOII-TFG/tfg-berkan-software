@@ -14,7 +14,7 @@
       <div class="row">
           <div class="col-lg-3"></div>
       </div>
-      <h4><%= orgName %> - Assignments</h4>
+      <h4><%= orgName %></h4>
   </div>
   <div class="container">
       <div class="row">
@@ -26,13 +26,13 @@
                     <h3>Assignments</h3>
                 </div>
                 <div class="col-lg-3">
-                  <input class="form-control" type="text" name="assignment_regex" value="" placeholder="Assignment RegeX">
+                  <input class="form-control" type="text" name="assignment_regex" id="assignment-regex" value="" placeholder="Assignment RegeX">
                 </div>
                 <div class="col-lg-3">
-                  <input class="form-control" type="text" name="assignment_name" value="" placeholder="Assignment Name">
+                  <input class="form-control" type="text" name="assignment_name" id="assignment-name" value="" placeholder="Assignment Name">
                 </div>
                 <div class="col-lg-2">
-                  <button type="button" class="btn btn-md btn-primary btn-block" onclick="newAssignment()"> <i class="fas fa-plus"></i> New Assignment</button>
+                  <button type="button" class="btn btn-md btn-primary btn-block" onclick="newAssignment('<%= orgName %>')"> <i class="fas fa-plus"></i> New Assignment</button>
                 </div>
               </div>
             </div>
