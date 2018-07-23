@@ -27,6 +27,15 @@ class GithubApiFunctions {
     }
   }  
   
+  
+  async orgRepos (orgName) {
+    try {
+      let result = await octokit.repos.getForOrg({ org: orgName })
+      return result
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 module.exports.GithubApiFunctions = GithubApiFunctions

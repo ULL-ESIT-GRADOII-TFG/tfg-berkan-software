@@ -2,6 +2,8 @@
 
 <%- include('layouts/autocheck'); -%>
     
+<% var orgName = orgName; %>
+
 <div class="content-wrapper">
   <div class="content-heading">
       <div class="row">
@@ -12,7 +14,7 @@
       <div class="row">
           <div class="col-lg-3"></div>
       </div>
-      <h4>Org Assignments</h4>
+      <h4><%= orgName %> - Assignments</h4>
   </div>
   <div class="container">
       <div class="row">
@@ -21,7 +23,7 @@
             <div class="panel-heading">
               <div class="row">
                 <div class="col-lg-4">
-                    <h3>Assigns</h3>
+                    <h3>Assignments</h3>
                 </div>
                 <div class="col-lg-3">
                   <input class="form-control" type="text" name="assignment_regex" value="" placeholder="Assignment RegeX">
@@ -30,7 +32,7 @@
                   <input class="form-control" type="text" name="assignment_name" value="" placeholder="Assignment Name">
                 </div>
                 <div class="col-lg-2">
-                  <button type="button" class="btn btn-md btn-primary btn-block"> <i class="fas fa-plus"></i> New Assignment</button>
+                  <button type="button" class="btn btn-md btn-primary btn-block" onclick="newAssignment()"> <i class="fas fa-plus"></i> New Assignment</button>
                 </div>
               </div>
             </div>

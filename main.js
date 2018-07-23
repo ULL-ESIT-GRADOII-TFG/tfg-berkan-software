@@ -132,13 +132,12 @@ ipcMain.on('render-orgs', (event, arg) => {
   let result = ghUser.userOrgs()
   
   result.then(({data, headers, status}) => {
-    console.log(data);
     viewRenderer.load(win, 'orgs', {orgs: data})
   })  
 })
 
 /* Function called from ipc.renderer to render orgs assignments. */
 ipcMain.on('render-assigns', (event, arg) => {
-  viewRenderer.load(win, 'assigns')
+  viewRenderer.load(win, 'assigns', {orgName: arg})
 })
  
