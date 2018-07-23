@@ -42,6 +42,7 @@ viewRenderer.use('ejs')
 
 let win // Necessary Keep a global reference of the window object.
 
+
 /* Function to create the mainwindow of the electron app
 The function is exported to use when electron is inicializate in app.js. */
 function createWindow () {
@@ -71,6 +72,7 @@ initialization and is ready to create browser windows.
 Call the function imported from window.js */
 app.on('ready', createWindow)
 
+
 /* Quit when all windows are closed. */
 app.on('window-all-closed', function () {
   /* On OS X it is common for applications and their menu bar
@@ -80,8 +82,10 @@ app.on('window-all-closed', function () {
   }
 })
 
+
 /* Set topside menu with Electron Menu Functions. */
 app.on('ready', topsidemenu.createMenu)
+
 
 /* Function called from ipc.renderer to githuboauth in login. */
 ipcMain.on('github-oauth', (event, arg) => {
@@ -107,10 +111,12 @@ ipcMain.on('github-oauth', (event, arg) => {
     })
 })
 
+
 /* Function called from ipc.renderer to render index. */
 ipcMain.on('render-index', (event, arg) => {
   viewRenderer.load(win, 'index')
 })
+
 
 /* Function called from ipc.renderer to render profile. */
 ipcMain.on('render-profile', (event, arg) => {
@@ -124,6 +130,7 @@ ipcMain.on('render-profile', (event, arg) => {
   })  
 })
 
+
 /* Function called from ipc.renderer to render orgs. */
 ipcMain.on('render-orgs', (event, arg) => {
   let rawdata = fs.readFileSync('config/.autocheck/token.json');  
@@ -136,9 +143,17 @@ ipcMain.on('render-orgs', (event, arg) => {
   })  
 })
 
+
 /* Function called from ipc.renderer to render orgs assignments. */
 ipcMain.on('render-assignments', (event, arg) => {
-  viewRenderer.load(win, 'assignment', {orgName: arg})
+  let assignments = null
+  
+  if (fs.existsSync('config/.autocheck/'+arg+'.json')) {
+    let rawdata = fs.readFileSync('config/.autocheck/'+arg+'.json');  
+    assignments = JSON.parse(rawdata); //now it an object
+  }
+  console.log(assignments.assignments);
+  viewRenderer.load(win, 'assignment', {orgName: arg, assignments: assignments.assignments})
 })
  
  
@@ -157,5 +172,5 @@ ipcMain.on('render-newassignment', (event, arg) => {
   let data = JSON.stringify(assignments); //convert it back to json
   fs.writeFileSync('config/.autocheck/'+arg[0]+'.json', data);
     
-  viewRenderer.load(win, 'assignment', {orgName: arg[0]})
+  viewRenderer.load(win, 'assignment', {orgName: arg[0], assignments: assignments.assignments})
 })
