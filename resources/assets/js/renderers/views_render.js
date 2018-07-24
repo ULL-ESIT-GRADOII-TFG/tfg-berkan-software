@@ -12,5 +12,8 @@ function indexRender () {
 
 function AssignmentsRender (orgName) {
   ipcRender.send('render-assignments', orgName)
-  console.log(orgName);
+}
+
+function AssigmentReposRender (assignmentName, assignmentRegex, orgName) {
+  ipcRender.send('render-assignment-repos', [assignmentName, assignmentRegex, orgName])
 }
