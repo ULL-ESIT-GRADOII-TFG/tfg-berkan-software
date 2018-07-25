@@ -3,6 +3,7 @@
 <%- include('layouts/autocheck'); -%>
     
 <% var orgName = orgName; %>
+<% var orgAvatar = orgAvatar; %>
 <% var assignmentRegex = assignmentRegex; %>
 <% var assignmentName = assignmentName; %>
 
@@ -22,7 +23,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a role="button" onclick="indexRender()">Home</a></li>
           <li class="breadcrumb-item"><a role="button" onclick="OrgsRender()">Orgs</a></li>
-          <li class="breadcrumb-item"><a role="button" onclick="AssignmentsRender('<%= orgName %>')">Assignment</a></li>
+          <li class="breadcrumb-item"><a role="button" onclick="AssignmentsRender('<%= orgName %>', '<%= orgAvatar %>')">Assignment</a></li>
           <li class="breadcrumb-item active">Repos</li>
         </ol>
       </div>
@@ -46,7 +47,7 @@
                         <div class="panel-heading">
                           <div class="row">
                             <div class="col-lg-1">
-                              <img src="" class="img-responsive"  style=" height:35px;">
+                              <img src="<%= orgAvatar %>" class="img-responsive"  style=" height:35px;">
                             </div>
                             <div class="col-lg-4">
                                 <a role="button"><h4> <%=  %></h4></a>

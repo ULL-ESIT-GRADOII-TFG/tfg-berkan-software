@@ -3,6 +3,7 @@
 <%- include('layouts/autocheck'); -%>
     
 <% var orgName = orgName; %>
+<% var orgAvatar = orgAvatar; %>
 <% var assignments = assignments; %>
 
 <div class="content-wrapper">
@@ -41,7 +42,7 @@
                   <input class="form-control" type="text" name="assignment_name" id="assignment-name" value="" placeholder="Assignment Name">
                 </div>
                 <div class="col-lg-2">
-                  <button type="button" class="btn btn-md btn-primary btn-block" onclick="newAssignment('<%= orgName %>')"> <i class="fas fa-plus"></i> New Assignment</button>
+                  <button type="button" class="btn btn-md btn-primary btn-block" onclick="newAssignment('<%= orgName %>', '<%= orgAvatar %>')"> <i class="fas fa-plus"></i> New Assignment</button>
                 </div>
               </div>
             </div>
@@ -54,10 +55,10 @@
                         <div class="panel-heading">
                           <div class="row">
                             <div class="col-lg-1">
-                              <img src="" class="img-responsive"  style=" height:35px;">
+                              <img src="<%= orgAvatar %>" class="img-responsive"  style=" height:35px;">
                             </div>
                             <div class="col-lg-4">
-                                <a role="button" onclick="AssigmentReposRender('<%= assignments[i].name %>', '<%= assignments[i].regex %>', '<%= orgName %>')"><h4><%= assignments[i].name %></h4></a>
+                                <a role="button" onclick="AssigmentReposRender('<%= assignments[i].name %>', '<%= assignments[i].regex %>', '<%= orgName %>', '<%= orgAvatar %>')"><h4><%= assignments[i].name %></h4></a>
                             </div>
                           </div>
                         </div>

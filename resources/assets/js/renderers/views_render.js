@@ -10,10 +10,10 @@ function indexRender () {
   ipcRender.send('render-index', 'index')
 }
 
-function AssignmentsRender (orgName) {
-  ipcRender.send('render-assignments', orgName)
+function AssignmentsRender (orgName, orgAvatar) {
+  ipcRender.send('render-assignments', [orgName, orgAvatar])
 }
 
-function AssigmentReposRender (assignmentName, assignmentRegex, orgName) {
-  ipcRender.send('render-assignment-repos', [assignmentName, assignmentRegex, orgName])
+function AssigmentReposRender (assignmentName, assignmentRegex, orgName, orgAvatar) {
+  ipcRender.send('render-assignment-repos', [assignmentName, assignmentRegex, orgName, orgAvatar])
 }

@@ -149,13 +149,13 @@ ipcMain.on('render-orgs', (event, arg) => {
 ipcMain.on('render-assignments', (event, arg) => {
   let auxassignments = null
   
-  if (fs.existsSync('config/.autocheck/assignments/'+arg+'.json')) {
-    let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg+'.json');  
+  if (fs.existsSync('config/.autocheck/assignments/'+arg[0]+'.json')) {
+    let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg[0]+'.json');  
     let assignments = JSON.parse(rawdata); //now it an object
     auxassignments = assignments.assignments
   }
 
-  viewRenderer.load(win, 'assignments', {orgName: arg, assignments: auxassignments})
+  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[1], assignments: auxassignments})
 })
  
  
@@ -174,11 +174,11 @@ ipcMain.on('render-newassignment', (event, arg) => {
   let data = JSON.stringify(assignments); //convert it back to json
   fs.writeFileSync('config/.autocheck/assignments/'+arg[0]+'.json', data);
     
-  viewRenderer.load(win, 'assignments', {orgName: arg[0], assignments: assignments.assignments})
+  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[3], assignments: assignments.assignments})
 })
 
 
-/* Function called from ipc.renderer to create org assignments. */
+/* Function called from ipc.renderer to render assignment repos. */
 ipcMain.on('render-assignment-repos', (event, arg) => {
   let rawdata = fs.readFileSync('config/.autocheck/token.json');  
   let user = JSON.parse(rawdata);
@@ -187,6 +187,6 @@ ipcMain.on('render-assignment-repos', (event, arg) => {
   let result = ghUser.orgRepos(arg[2])
   
   result.then(({data, headers, status}) => {
-    viewRenderer.load(win, 'assignmentrepos', {orgName: arg[2], assignmentName: arg[0], assignmentRegex: arg[1]})
+    viewRenderer.load(win, 'assignmentrepos', {orgName: arg[2], orgAvatar: arg[3], assignmentName: arg[0], assignmentRegex: arg[1]})
   })
 })
