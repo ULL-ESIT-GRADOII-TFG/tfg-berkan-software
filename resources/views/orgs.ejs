@@ -12,14 +12,21 @@
           </div>
       </div>
       <div class="row">
-          <div class="col-lg-3"></div>
+          <div class="col-lg-3">
+            <h4>List your Orgs.</h4>
+          </div>
       </div>
-      <h4>List your Orgs.</h4>
+      <div class="row" style="border-top: 1px solid white; margin-top:10px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a role="button" onclick="indexRender()">Home</a></li>
+          <li class="breadcrumb-item active">Orgs</li>
+        </ol>
+      </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="panel panel-default" style="border:1px solid #b3b3b3;">
+        <div class="panel panel-default" style="border:1px solid black;">
           <div class="panel-heading">
             <div class="row">
               <div class="col-lg-4">
@@ -31,7 +38,7 @@
             <% for(var i=0; i < orgs.length; i++) { %>
               <div class="row">
                 <div class="col-lg-12">
-                  <div class="panel panel-default" style="border:1px solid white;">
+                  <div style="border:1px solid white; border-bottom:1px solid black;">
                     <div class="panel-heading">
                       <div class="row">
                         <div class="col-lg-1">

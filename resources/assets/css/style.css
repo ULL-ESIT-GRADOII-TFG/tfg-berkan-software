@@ -409,7 +409,7 @@ body {
   height: 100%;
   margin-left: 0;
   z-index: 111;
-  background-color: #f5f7fa;
+  background-color: rgb(104,183,131);
 }
 .wrapper > footer {
   position: absolute;
@@ -443,7 +443,6 @@ body {
 }
 .content-wrapper > h3,
 .content-wrapper > .content-heading {
-  font-size: 24px;
   line-height: 1.1;
   color: #fff;
   margin: -15px;
@@ -451,7 +450,6 @@ body {
   padding: 15px;
   font-weight: normal;
   background-color: rgb(37,41,46);
-  border-bottom: 1px solid #cfdbe2;
 }
 .content-wrapper > h3 > small,
 .content-wrapper > .content-heading > small {
@@ -1019,7 +1017,7 @@ _:-ms-lang(x),
   /* fixes chrome jump */
   margin-bottom: 0;
   border-radius: 0;
-  background-color: #fff;
+  background-color: grey;
   z-index: 1050;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
@@ -1037,10 +1035,7 @@ _:-ms-lang(x),
   position: relative;
 }
 .topnavbar .navbar-header {
-  background-color: transparent;
-  background-image: -webkit-linear-gradient(left, #23b7e5 0%, #51c6ea 100%);
-  background-image: -o-linear-gradient(left, #23b7e5 0%, #51c6ea 100%);
-  background-image: linear-gradient(to right, #23b7e5 0%, #51c6ea 100%);
+  background-color: grey;
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff23b7e5', endColorstr='#ff51c6ea', GradientType=1);
 }
@@ -1073,13 +1068,13 @@ _:-ms-lang(x),
 }
 .topnavbar .navbar-nav > li > a,
 .topnavbar .navbar-nav > .open > a {
-  color: #23b7e5;
+  color: black;
 }
 .topnavbar .navbar-nav > li > a:hover,
 .topnavbar .navbar-nav > .open > a:hover,
 .topnavbar .navbar-nav > li > a:focus,
 .topnavbar .navbar-nav > .open > a:focus {
-  color: #3588AD;
+  color: darkgreen;
 }
 .topnavbar .navbar-nav > .active > a,
 .topnavbar .navbar-nav > .open > a,
@@ -1126,7 +1121,7 @@ _:-ms-lang(x),
 }
 .nav-wrapper {
   padding: 0 15px;
-  background-color: transparent;
+  background-color: grey;
 }
 .nav-wrapper .nav.navbar-nav {
   float: left;
@@ -1613,7 +1608,6 @@ _:-ms-lang(x),
   font-weight: normal;
   border-radius: 0;
   color: #909fa7;
-  padding: 10px 20px;
 }
 .breadcrumb .active {
   color: #fff;

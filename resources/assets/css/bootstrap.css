@@ -1074,7 +1074,7 @@ html {
     font-size: 14px;
     line-height: 1.52857143;
     color: #515253;
-    background-color: #f5f7fa;
+    background-color: rgb(104,183,131);
   }
   input,
   button,
@@ -4733,10 +4733,12 @@ html {
     color: #444444;
   }
   .breadcrumb {
-    padding: 12px 15px;
+    padding-top: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
     margin-bottom: 21px;
     list-style: none;
-    background-color: #fafafa;
+    background-color: rgb(37,41,46);
     border-radius: 4px;
   }
   .breadcrumb > li {

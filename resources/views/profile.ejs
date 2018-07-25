@@ -12,13 +12,20 @@
           </div>
       </div>
       <div class="row">
-          <div class="col-lg-3"></div>
+          <div class="col-lg-3">
+            <h4>Github Profile</h4>
+          </div>
       </div>
-      <h4>Github Profile</h4>
+      <div class="row" style="border-top: 1px solid white; margin-top:10px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a role="button" onclick="indexRender()">Home</a></li>
+          <li class="breadcrumb-item active">Profile</li>
+        </ol>
+      </div>
   </div>
   <div class="container">
       <div class="row">
-          <div class="panel panel-default">
+          <div class="panel panel-default" style="border:1px solid black;">
               <div class="panel-body text-center">
                   <div class="pv-lg">
                     <img class="center-block img-responsive img-circle img-thumbnail thumb96" src="<%= user.avatar_url %>" alt="Contact" />
