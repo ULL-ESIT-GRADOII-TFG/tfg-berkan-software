@@ -38,8 +38,11 @@
                         <div class="col-lg-1">
                           <img src="<%= orgs[i].avatar_url %>" class="img-responsive"  style=" height:35px;">
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-5">
                             <a role="button" onclick="AssignmentsRender('<%= orgs[i].login %>' , '<%= orgs[i].avatar_url %>')"><h4><%= orgs[i].login %></h4></a>
+                        </div>
+                        <div class="col-lg-1 pull-right">
+                          <a role="button" onclick="openOrg('<%= orgs[i].login %>')"><h5>Link</h5></a>
                         </div>
                       </div>
                     </div>

@@ -76,6 +76,7 @@ function createWindow () {
         let result = ghUser.userOrgs()
         
         result.then(({data, headers, status}) => {
+          console.log(data);
           viewRenderer.load(win, 'orgs', {orgs: data})
         })  
       }, err => {
