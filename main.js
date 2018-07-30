@@ -105,19 +105,19 @@ ipcMain.on('github-oauth', (event, arg) => {
       }
       fs.writeFileSync('config/.autocheck/token.json', data); 
       
-      // Render index view.
-      viewRenderer.load(win, 'index')
+      // Render orgsview view.
+      let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+      let user = JSON.parse(rawdata); 
+      ghUser = new GithubApiFunctions(user.access_token)
+      let result = ghUser.userOrgs()
+      
+      result.then(({data, headers, status}) => {
+        viewRenderer.load(win, 'orgs', {orgs: data})
+      })  
     }, err => {
       console.log('Error while getting token', err)
     })
 })
-
-
-/* Function called from ipc.renderer to render index. */
-ipcMain.on('render-index', (event, arg) => {
-  viewRenderer.load(win, 'index')
-})
-
 
 /* Function called from ipc.renderer to render profile. */
 ipcMain.on('render-profile', (event, arg) => {
@@ -187,6 +187,8 @@ ipcMain.on('render-assignment-repos', (event, arg) => {
   let result = ghUser.orgRepos(arg[2])
   
   result.then(({data, headers, status}) => {
+    console.log(data);
+
     viewRenderer.load(win, 'assignmentrepos', {orgName: arg[2], orgAvatar: arg[3], assignmentName: arg[0], assignmentRegex: arg[1]})
   })
 })

@@ -6,10 +6,6 @@ function OrgsRender () {
   ipcRender.send('render-orgs', 'orgs')
 }
 
-function indexRender () {
-  ipcRender.send('render-index', 'index')
-}
-
 function AssignmentsRender (orgName, orgAvatar) {
   ipcRender.send('render-assignments', [orgName, orgAvatar])
 }

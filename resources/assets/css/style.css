@@ -1035,7 +1035,7 @@ _:-ms-lang(x),
   position: relative;
 }
 .topnavbar .navbar-header {
-  background-color: grey;
+  background-color: lightgray;
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff23b7e5', endColorstr='#ff51c6ea', GradientType=1);
 }
@@ -1074,7 +1074,7 @@ _:-ms-lang(x),
 .topnavbar .navbar-nav > .open > a:hover,
 .topnavbar .navbar-nav > li > a:focus,
 .topnavbar .navbar-nav > .open > a:focus {
-  color: darkgreen;
+  color: rgb(104,183,131);
 }
 .topnavbar .navbar-nav > .active > a,
 .topnavbar .navbar-nav > .open > a,
