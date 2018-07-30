@@ -54,9 +54,36 @@ function createWindow () {
     minHeight: 800
   //  icon: path.join(__dirname, 'assets/icons/png/64x64.png')
   })
-  // Load the index of the app.
-  viewRenderer.load(win, 'login')
 
+  // Check if the user got token.
+  if (fs.existsSync('config/.autocheck/token.json')) {
+    githubOAuth.getAccessToken(options)
+      .then(token => {
+        // Save the user token in json file.
+        let user_token = {  
+            access_token: token.access_token,
+            token_type: token.token_type, 
+            scope: token.scope,
+        };
+        let data = JSON.stringify(token);  
+        
+        fs.writeFileSync('config/.autocheck/token.json', data); 
+        
+        // Render orgs view view.
+        let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+        let user = JSON.parse(rawdata); 
+        ghUser = new GithubApiFunctions(user.access_token)
+        let result = ghUser.userOrgs()
+        
+        result.then(({data, headers, status}) => {
+          viewRenderer.load(win, 'orgs', {orgs: data})
+        })  
+      }, err => {
+        console.log('Error while getting token', err)
+      })
+  } else {
+    viewRenderer.load(win, 'login')
+  }
 
   // Emitted when the window is closed.
   win.on('closed', function () {
@@ -66,6 +93,7 @@ function createWindow () {
     win = null
   })
 }
+
 
 /* This method will be called when Electron has finished
 initialization and is ready to create browser windows.
@@ -191,4 +219,12 @@ ipcMain.on('render-assignment-repos', (event, arg) => {
 
     viewRenderer.load(win, 'assignmentrepos', {orgName: arg[2], orgAvatar: arg[3], assignmentName: arg[0], assignmentRegex: arg[1]})
   })
+})
+
+
+/* Function called from ipc.renderer to render login and logout. */
+ipcMain.on('render-login', (event, arg) => {
+  fs.unlinkSync('config/.autocheck/token.json')
+
+  viewRenderer.load(win, 'login')
 })

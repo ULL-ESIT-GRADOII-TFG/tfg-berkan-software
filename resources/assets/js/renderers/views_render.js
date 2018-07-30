@@ -1,3 +1,7 @@
+function loginRender () {
+  ipcRender.send('render-login', 'login')
+}
+
 function profileRender () {
   ipcRender.send('render-profile', 'profile')
 }
