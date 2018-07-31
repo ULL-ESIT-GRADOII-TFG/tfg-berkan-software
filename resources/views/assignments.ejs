@@ -59,6 +59,11 @@
                             <div class="col-lg-4">
                                 <a role="button" onclick="AssigmentReposRender('<%= assignments[i].name %>', '<%= assignments[i].regex %>', '<%= orgName %>', '<%= orgAvatar %>')"><h4><%= assignments[i].name %></h4></a>
                             </div>
+                            <div class="col-lg-1 pull-right">
+                              <button type="button" class="btn btn-sm btn-danger btn pull-right" onclick="deleteAssignment('<%= orgName %>', '<%= orgAvatar %>', '<%= assignments[i].index %>')">
+                                  <i class="far fa-trash-alt"></i>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>

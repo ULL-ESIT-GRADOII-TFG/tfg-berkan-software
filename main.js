@@ -198,14 +198,41 @@ ipcMain.on('render-newassignment', (event, arg) => {
   
   if (fs.existsSync('config/.autocheck/assignments/'+arg[0]+'.json')) {
     let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg[0]+'.json');  
-    assignments = JSON.parse(rawdata); //now it an object
+    assignments = JSON.parse(rawdata);
   }
-    
-  assignments.assignments.push({name: arg[1], regex: arg[2]}); //add some data
-  let data = JSON.stringify(assignments); //convert it back to json
+
+  assignments.assignments.push({index: assignments.assignments.length.toString(), name: arg[1], regex: arg[2]}); 
+  let data = JSON.stringify(assignments); 
   fs.writeFileSync('config/.autocheck/assignments/'+arg[0]+'.json', data);
     
   viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[3], assignments: assignments.assignments})
+})
+
+
+/* Function called from ipc.renderer to delete org assignments. */
+ipcMain.on('render-deleteassignment', (event, arg) => {
+  let assignments = {
+    assignments: []
+  };
+  
+  let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg[0]+'.json');  
+  let assignmentsaux = JSON.parse(rawdata);
+
+  // Filter repos by RegExp
+  let regex = new RegExp(arg[1], 'g');
+  
+  for (var i = 0; i < assignmentsaux.assignments.length; i++) {
+
+    var assignment_filter = assignmentsaux.assignments[i].index.match(regex);
+    if (assignment_filter == null) {
+      assignments.assignments.push(assignmentsaux.assignments[i])
+    }
+  }
+
+  let data = JSON.stringify(assignments); 
+  fs.writeFileSync('config/.autocheck/assignments/'+arg[0]+'.json', data);
+    
+  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[2], assignments: assignments.assignments})
 })
 
 
