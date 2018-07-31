@@ -6,6 +6,7 @@
 <% var orgAvatar = orgAvatar; %>
 <% var assignmentRegex = assignmentRegex; %>
 <% var assignmentName = assignmentName; %>
+<% var repos = repos; %>
 
 <div class="content-wrapper">
   <div class="content-heading">
@@ -39,7 +40,7 @@
               </div>
             </div>
             <div class="panel-body fixed-panel"> 
-
+              <% for(var i=0; i < repos.length; i++) { %>
                   <div class="row">
                     <div class="col-lg-12">
                       <div class="panel panel-default" style="border:1px solid white; border-bottom:1px solid black;">
@@ -49,10 +50,10 @@
                               <img src="<%= orgAvatar %>" class="img-responsive"  style=" height:35px;">
                             </div>
                             <div class="col-lg-5">
-                                <a role="button"><h4> NOMBRE REPO</h4></a>
+                                <a role="button"><h4> <%= repos[i].name %> </h4></a>
                             </div>
                             <div class="col-lg-5">
-                                <a class="pull-right" role="button"><h4> REPO MEMBERS</h4></a>
+                                <a class="pull-right" role="button" onclick="openRepo('<%= repos[i].name %>', '<%= orgName %>')"><h5> Link </h5></a>
                             </div>
                             <div class="col-lg-1">
                               <button type="button" name="button">ACTIONS</button>
@@ -62,7 +63,7 @@
                       </div>
                     </div>
                   </div>
-
+                <% } %>
             </div>
           </div>
       </div>

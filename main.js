@@ -11,6 +11,9 @@ const GithubApiFunctionsClass = require('./app/githubfunctions')
 const GithubApiFunctions = GithubApiFunctionsClass.GithubApiFunctions
 const ElectronViewRenderer = require('electron-view-renderer')
 const fs = require('fs'); 
+const octokit = require('@octokit/rest')({
+  debug: true
+})
 
 /// /// OAUTH
 const oauthConfig = require('./config/electron/oauth').oauth
@@ -76,7 +79,6 @@ function createWindow () {
         let result = ghUser.userOrgs()
         
         result.then(({data, headers, status}) => {
-          console.log(data);
           viewRenderer.load(win, 'orgs', {orgs: data})
         })  
       }, err => {
@@ -213,12 +215,25 @@ ipcMain.on('render-assignment-repos', (event, arg) => {
   let user = JSON.parse(rawdata);
   
   ghUser = new GithubApiFunctions(user.access_token)
-  let result = ghUser.orgRepos(arg[2])
+  let result = ghUser.paginate(arg[2])
+  //let result = ghUser.orgRepos(arg[2])
   
-  result.then(({data, headers, status}) => {
-    console.log(data);
+  .then(data => {
+    let repos = {
+      repos: []
+    };
+        
+    // Filter repos by RegExp
+    let regex = new RegExp(arg[1], 'g');
 
-    viewRenderer.load(win, 'assignmentrepos', {orgName: arg[2], orgAvatar: arg[3], assignmentName: arg[0], assignmentRegex: arg[1]})
+    for (var i = 0; i < Object.keys(data).length; i++) {
+      var orgrepos_filter = data[i].name.match(regex);
+      if (orgrepos_filter != null) {
+        repos.repos.push(data[i])
+      }
+    }   
+    
+    viewRenderer.load(win, 'assignmentrepos', {orgName: arg[2], orgAvatar: arg[3], assignmentName: arg[0], assignmentRegex: arg[1], repos: repos.repos})
   })
 })
 
@@ -226,6 +241,6 @@ ipcMain.on('render-assignment-repos', (event, arg) => {
 /* Function called from ipc.renderer to render login and logout. */
 ipcMain.on('render-login', (event, arg) => {
   fs.unlinkSync('config/.autocheck/token.json')
-
+  
   viewRenderer.load(win, 'login')
 })

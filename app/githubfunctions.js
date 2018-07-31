@@ -30,12 +30,29 @@ class GithubApiFunctions {
   
   async orgRepos (orgName) {
     try {
-      let result = await octokit.repos.getForOrg({ org: orgName })
+      let result = await octokit.repos.getForOrg({ org: orgName,  type: 'all', per_page: 100, page: 1 })
       return result
     } catch (error) {
       console.log(error)
     }
   }
+  
+  
+  async paginate (orgName) {
+    let response = await octokit.repos.getForOrg({
+      org: orgName,
+      type: 'all',
+      per_page:100
+    })
+    var { data } = response;
+    while (octokit.hasNextPage(response)) {
+      response = await octokit.getNextPage(response)
+      data = data.concat(response.data)
+    }
+
+    return data    
+  }
+  
 }
 
 module.exports.GithubApiFunctions = GithubApiFunctions
