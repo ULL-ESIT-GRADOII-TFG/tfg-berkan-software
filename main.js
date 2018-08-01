@@ -136,9 +136,11 @@ ipcMain.on('github-oauth', (event, arg) => {
       }
       fs.writeFileSync('config/.autocheck/token.json', data); 
       
-      // Render orgsview view.
+      // Get token stored in json.
       let rawdata = fs.readFileSync('config/.autocheck/token.json');  
       let user = JSON.parse(rawdata); 
+      
+      // Call octokit function to get user organizations.
       ghUser = new GithubApiFunctions(user.access_token)
       let result = ghUser.userOrgs()
       
@@ -150,10 +152,14 @@ ipcMain.on('github-oauth', (event, arg) => {
     })
 })
 
+
 /* Function called from ipc.renderer to render profile. */
 ipcMain.on('render-profile', (event, arg) => {
+  // Get token stored in json.
   let rawdata = fs.readFileSync('config/.autocheck/token.json');  
   let user = JSON.parse(rawdata); 
+  
+  // Call octokit function to get user profile.
   ghUser = new GithubApiFunctions(user.access_token)
   let result = ghUser.userProfile()
   
@@ -165,8 +171,11 @@ ipcMain.on('render-profile', (event, arg) => {
 
 /* Function called from ipc.renderer to render orgs. */
 ipcMain.on('render-orgs', (event, arg) => {
+  // Get token stored in json.
   let rawdata = fs.readFileSync('config/.autocheck/token.json');  
   let user = JSON.parse(rawdata); 
+  
+  // Call octokit function to get user organizations.
   ghUser = new GithubApiFunctions(user.access_token)
   let result = ghUser.userOrgs()
   

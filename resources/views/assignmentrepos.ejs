@@ -32,10 +32,18 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="panel panel-default" style="border:1px solid black;">
-            <div class="panel-heading">
+            <div class="panel-heading" style="border-bottom:1px solid black">
               <div class="row">
                 <div class="col-lg-4">
                     <h3>Repos</h3>
+                </div>
+                <div class="col-lg-3">
+                  <input class="form-control" type="text" name="evalrepo_name" id="evalrepo-name" value="" placeholder="Repo Name">
+                </div>
+                <div class="col-lg-2">
+                  <button type="button" class="btn btn-primary btn-block" onclick="createEvalRepo('<%= orgName %>', '<%= orgAvatar %>', '<%= assignmentRegex %>', '<%= assignmentName %>', '<%= repos %>')"> 
+                    <i class="fas fa-check"></i> Create Eval Repo
+                  </button>
                 </div>
               </div>
             </div>

@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="panel panel-default" style="border:1px solid black;">
-          <div class="panel-heading">
+          <div class="panel-heading" style="border-bottom:1px solid black">
             <div class="row">
               <div class="col-lg-4">
                   <h3>Orgs</h3>
@@ -41,7 +41,7 @@
                         <div class="col-lg-5">
                             <a role="button" onclick="AssignmentsRender('<%= orgs[i].login %>' , '<%= orgs[i].avatar_url %>')"><h4><%= orgs[i].login %></h4></a>
                         </div>
-                        <div class="col-lg-1 pull-right">
+                        <div class="col-lg-1">
                           <a role="button" onclick="openOrg('<%= orgs[i].login %>')"><h5>Link</h5></a>
                         </div>
                       </div>
