@@ -186,7 +186,7 @@ ipcMain.on('render-assignments', (event, arg) => {
     auxassignments = assignments.assignments
   }
 
-  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[1], assignments: auxassignments})
+  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[1], assignments: auxassignments, repos: null})
 })
  
  
@@ -205,7 +205,7 @@ ipcMain.on('render-newassignment', (event, arg) => {
   let data = JSON.stringify(assignments); 
   fs.writeFileSync('config/.autocheck/assignments/'+arg[0]+'.json', data);
     
-  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[3], assignments: assignments.assignments})
+  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[3], assignments: assignments.assignments, repos: null})
 })
 
 
@@ -232,7 +232,42 @@ ipcMain.on('render-deleteassignment', (event, arg) => {
   let data = JSON.stringify(assignments); 
   fs.writeFileSync('config/.autocheck/assignments/'+arg[0]+'.json', data);
     
-  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[2], assignments: assignments.assignments})
+  viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[2], assignments: assignments.assignments, repos: null})
+})
+
+
+/* Function called from ipc.renderer to search assignment repos. */
+ipcMain.on('render-searchrepos', (event, arg) => {  
+  let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+  let user = JSON.parse(rawdata);
+  
+  ghUser = new GithubApiFunctions(user.access_token)
+  let result = ghUser.paginate(arg[0])
+  
+  .then(data => {
+    let repos = {
+      repos: []
+    };
+        
+    // Filter repos by RegExp
+    let regex = new RegExp(arg[1], 'g');
+
+    for (var i = 0; i < Object.keys(data).length; i++) {
+      var orgrepos_filter = data[i].name.match(regex);
+      if (orgrepos_filter != null) {
+        repos.repos.push(data[i])
+      }
+    }   
+    
+    let auxassignments = null
+    
+    if (fs.existsSync('config/.autocheck/assignments/'+arg[0]+'.json')) {
+      let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg[0]+'.json');  
+      let assignments = JSON.parse(rawdata); //now it an object
+      auxassignments = assignments.assignments 
+    }
+    viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[2], assignments: auxassignments, repos: repos.repos})
+  })
 })
 
 

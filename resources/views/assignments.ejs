@@ -5,6 +5,7 @@
 <% var orgName = orgName; %>
 <% var orgAvatar = orgAvatar; %>
 <% var assignments = assignments; %>
+<% var repos = repos; %>
 
 <div class="content-wrapper">
   <div class="content-heading">
@@ -29,9 +30,9 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="panel panel-default" style="border:1px solid black;">
-            <div class="panel-heading">
+            <div class="panel-heading" style="border-bottom:1px solid black">
               <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <h3>Assignments</h3>
                 </div>
                 <div class="col-lg-3">
@@ -40,42 +41,75 @@
                 <div class="col-lg-3">
                   <input class="form-control" type="text" name="assignment_name" id="assignment-name" value="" placeholder="Assignment Name">
                 </div>
-                <div class="col-lg-2">
-                  <button type="button" class="btn btn-md btn-primary btn-block" onclick="newAssignment('<%= orgName %>', '<%= orgAvatar %>')"> <i class="fas fa-plus"></i> New Assignment</button>
+                <div class="col-lg-3">
+                  <button type="button" class="btn btn-md btn-primary " onclick="newAssignment('<%= orgName %>', '<%= orgAvatar %>')"> 
+                    <i class="fas fa-plus"></i> New Assignment
+                  </button>
+                  <button type="button" class="btn btn-md btn-green" onclick="searchRepos('<%= orgName %>', '<%= orgAvatar %>')">
+                      <i class="fas fa-search"></i>
+                  </button>
                 </div>
               </div>
             </div>
             <div class="panel-body fixed-panel"> 
-              <%if (assignments != null) { %>
-                <% for(var i=0; i < assignments.length; i++) { %>
+                <div class="col-lg-6">
                   <div class="row">
                     <div class="col-lg-12">
-                      <div style="border:1px solid white; border-bottom:1px solid black;">
-                        <div class="panel-heading">
-                          <div class="row">
-                            <div class="col-lg-1">
-                              <img src="<%= orgAvatar %>" class="img-responsive"  style=" height:35px;">
-                            </div>
-                            <div class="col-lg-4">
-                                <a role="button" onclick="AssigmentReposRender('<%= assignments[i].name %>', '<%= assignments[i].regex %>', '<%= orgName %>', '<%= orgAvatar %>')"><h4><%= assignments[i].name %></h4></a>
-                            </div>
-                            <div class="col-lg-1 pull-right">
-                              <button type="button" class="btn btn-sm btn-danger btn pull-right" onclick="deleteAssignment('<%= orgName %>', '<%= orgAvatar %>', '<%= assignments[i].index %>')">
-                                  <i class="far fa-trash-alt"></i>
-                              </button>
-                            </div>
-                          </div>
+                      <div class="panel panel-default" style="border:1px solid white;">
+                        <div class="panel-heading" style="padding:3%">
+                          <h4>Search Results</h4>
                         </div>
+                        <div class="panel-body">
+                          <%if (repos != null) { %>
+                            <% for(var i=0; i < repos.length; i++) { %>
+                              <div class="row" style="border:1px solid black; padding:2%">
+                                <div class="col-lg-9">
+                                    <a role="button"><h5><%= repos[i].name %></h5></a>
+                                </div>
+                              </div>
+                          <% } %>  
+                        <% } %> 
                       </div>
-                    </div>
+                    </div>   
                   </div>
-                <% } %>  
-              <% } %>    
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="panel panel-default" style="border:1px solid white;">
+                      <div class="panel-heading" style="padding:3%">
+                        <h4>My assignments</h4>
+                      </div>
+                      <div class="panel-body">
+                        <%if (assignments != null) { %>
+                          <% for(var i=0; i < assignments.length; i++) { %>
+                  
+                            <div class="row" style="border:1px solid black; padding:2%">
+                              <div class="col-lg-2">
+                                <img src="<%= orgAvatar %>" class="img-responsive"  style=" height:35px;">
+                              </div>
+                              <div class="col-lg-9">
+                                  <a role="button" onclick="AssigmentReposRender('<%= assignments[i].name %>', '<%= assignments[i].regex %>', '<%= orgName %>', '<%= orgAvatar %>')"><h5><%= assignments[i].name %></h5></a>
+                              </div>
+                              <div class="col-lg-1 pull-right">
+                                <button type="button" class="btn btn-sm btn-danger btn pull-right" onclick="deleteAssignment('<%= orgName %>', '<%= orgAvatar %>', '<%= assignments[i].index %>')">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                              </div>
+                            </div>
+                        <% } %>  
+                      <% } %> 
+                    </div>
+                  </div>   
+                </div>
+              </div>
             </div>
-          </div>
-      </div>
 
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
           
