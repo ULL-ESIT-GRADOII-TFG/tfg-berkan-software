@@ -14,6 +14,7 @@ const fs = require('fs');
 const octokit = require('@octokit/rest')({
   debug: true
 })
+const homedir = require('os').homedir();
 
 /// /// OAUTH
 const oauthConfig = require('./config/electron/oauth').oauth
@@ -26,7 +27,7 @@ const windowParams = {
   }
 }
 const options = {
-  scope: ['read:user', 'repo', 'admin:org']
+  scope: 'read:user repo admin:org admin:org_hook delete_repo'
 }
 const githubOAuth = electronOauth2(oauthConfig, windowParams)
 let ghUser = null
@@ -59,7 +60,7 @@ function createWindow () {
   })
 
   // Check if the user got token.
-  if (fs.existsSync('config/.autocheck/token.json')) {
+  if (fs.existsSync(homedir+'/.autocheck/token.json')) {
     githubOAuth.getAccessToken(options)
       .then(token => {
         // Save the user token in json file.
@@ -70,10 +71,10 @@ function createWindow () {
         };
         let data = JSON.stringify(token);  
         
-        fs.writeFileSync('config/.autocheck/token.json', data); 
+        fs.writeFileSync(homedir+'/.autocheck/token.json', data); 
         
         // Render orgs view view.
-        let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+        let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
         let user = JSON.parse(rawdata); 
         ghUser = new GithubApiFunctions(user.access_token)
         let result = ghUser.userOrgs()
@@ -85,6 +86,7 @@ function createWindow () {
         console.log('Error while getting token', err)
       })
   } else {
+    
     viewRenderer.load(win, 'login')
   }
 
@@ -130,14 +132,14 @@ ipcMain.on('github-oauth', (event, arg) => {
       };
       let data = JSON.stringify(token);  
       
-      if (!fs.existsSync('config/.autocheck/')) {
-        fs.mkdirSync('config/.autocheck/')
-        fs.mkdirSync('config/.autocheck/assignments/')
+      if (!fs.existsSync(homedir+'/.autocheck/')) {
+        fs.mkdirSync(homedir+'/.autocheck/')
+        fs.mkdirSync(homedir+'/.autocheck/assignments/')
       }
-      fs.writeFileSync('config/.autocheck/token.json', data); 
+      fs.writeFileSync(homedir+'/.autocheck/token.json', data); 
       
       // Get token stored in json.
-      let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+      let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
       let user = JSON.parse(rawdata); 
       
       // Call octokit function to get user organizations.
@@ -156,7 +158,7 @@ ipcMain.on('github-oauth', (event, arg) => {
 /* Function called from ipc.renderer to render profile. */
 ipcMain.on('render-profile', (event, arg) => {
   // Get token stored in json.
-  let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+  let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
   let user = JSON.parse(rawdata); 
   
   // Call octokit function to get user profile.
@@ -172,7 +174,7 @@ ipcMain.on('render-profile', (event, arg) => {
 /* Function called from ipc.renderer to render orgs. */
 ipcMain.on('render-orgs', (event, arg) => {
   // Get token stored in json.
-  let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+  let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
   let user = JSON.parse(rawdata); 
   
   // Call octokit function to get user organizations.
@@ -189,8 +191,8 @@ ipcMain.on('render-orgs', (event, arg) => {
 ipcMain.on('render-assignments', (event, arg) => {
   let auxassignments = null
   
-  if (fs.existsSync('config/.autocheck/assignments/'+arg[0]+'.json')) {
-    let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg[0]+'.json');  
+  if (fs.existsSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json')) {
+    let rawdata = fs.readFileSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json');  
     let assignments = JSON.parse(rawdata); //now it an object
     auxassignments = assignments.assignments
   }
@@ -205,14 +207,14 @@ ipcMain.on('render-newassignment', (event, arg) => {
     assignments: []
   };
   
-  if (fs.existsSync('config/.autocheck/assignments/'+arg[0]+'.json')) {
-    let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg[0]+'.json');  
+  if (fs.existsSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json')) {
+    let rawdata = fs.readFileSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json');  
     assignments = JSON.parse(rawdata);
   }
 
   assignments.assignments.push({index: assignments.assignments.length.toString(), name: arg[1], regex: arg[2]}); 
   let data = JSON.stringify(assignments); 
-  fs.writeFileSync('config/.autocheck/assignments/'+arg[0]+'.json', data);
+  fs.writeFileSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json', data);
     
   viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[3], assignments: assignments.assignments, repos: null})
 })
@@ -224,7 +226,7 @@ ipcMain.on('render-deleteassignment', (event, arg) => {
     assignments: []
   };
   
-  let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg[0]+'.json');  
+  let rawdata = fs.readFileSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json');  
   let assignmentsaux = JSON.parse(rawdata);
 
   // Filter repos by RegExp
@@ -239,7 +241,7 @@ ipcMain.on('render-deleteassignment', (event, arg) => {
   }
 
   let data = JSON.stringify(assignments); 
-  fs.writeFileSync('config/.autocheck/assignments/'+arg[0]+'.json', data);
+  fs.writeFileSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json', data);
     
   viewRenderer.load(win, 'assignments', {orgName: arg[0], orgAvatar: arg[2], assignments: assignments.assignments, repos: null})
 })
@@ -247,7 +249,7 @@ ipcMain.on('render-deleteassignment', (event, arg) => {
 
 /* Function called from ipc.renderer to search assignment repos. */
 ipcMain.on('render-searchrepos', (event, arg) => {  
-  let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+  let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
   let user = JSON.parse(rawdata);
   
   ghUser = new GithubApiFunctions(user.access_token)
@@ -270,8 +272,8 @@ ipcMain.on('render-searchrepos', (event, arg) => {
     
     let auxassignments = null
     
-    if (fs.existsSync('config/.autocheck/assignments/'+arg[0]+'.json')) {
-      let rawdata = fs.readFileSync('config/.autocheck/assignments/'+arg[0]+'.json');  
+    if (fs.existsSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json')) {
+      let rawdata = fs.readFileSync(homedir+'/.autocheck/assignments/'+arg[0]+'.json');  
       let assignments = JSON.parse(rawdata); //now it an object
       auxassignments = assignments.assignments 
     }
@@ -282,7 +284,7 @@ ipcMain.on('render-searchrepos', (event, arg) => {
 
 /* Function called from ipc.renderer to render assignment repos. */
 ipcMain.on('render-assignment-repos', (event, arg) => {
-  let rawdata = fs.readFileSync('config/.autocheck/token.json');  
+  let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
   let user = JSON.parse(rawdata);
   
   ghUser = new GithubApiFunctions(user.access_token)
@@ -311,7 +313,7 @@ ipcMain.on('render-assignment-repos', (event, arg) => {
 
 /* Function called from ipc.renderer to render login and logout. */
 ipcMain.on('render-login', (event, arg) => {
-  fs.unlinkSync('config/.autocheck/token.json')
+  fs.unlinkSync(homedir+'/.autocheck/token.json')
   
   viewRenderer.load(win, 'login')
 })
