@@ -7,7 +7,6 @@ class GithubApiFunctions {
     octokit.authenticate({ type: 'oauth', token: token })
   }
   
-  
   async userProfile() {
     try {
       let result = await octokit.users.get({})
@@ -52,7 +51,6 @@ class GithubApiFunctions {
 
     return data    
   }
-  
 }
 
 module.exports.GithubApiFunctions = GithubApiFunctions

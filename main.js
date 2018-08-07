@@ -305,7 +305,7 @@ ipcMain.on('render-assignment-repos', (event, arg) => {
         repos.repos.push(data[i])
       }
     }   
-    
+
     viewRenderer.load(win, 'assignmentrepos', {orgName: arg[2], orgAvatar: arg[3], assignmentName: arg[0], assignmentRegex: arg[1], repos: repos.repos})
   })
 })
