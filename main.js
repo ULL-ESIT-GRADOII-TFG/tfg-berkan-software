@@ -55,8 +55,8 @@ function createWindow () {
     width: 1281,
     height: 800,
     minWidth: 1281,
-    minHeight: 800
-  //  icon: path.join(__dirname, 'assets/icons/png/64x64.png')
+    minHeight: 800,
+    icon: path.join(__dirname, 'assets/img/Logo_64x64.png')
   })
 
   // Check if the user got token.
