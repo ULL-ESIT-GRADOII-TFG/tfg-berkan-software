@@ -13,7 +13,7 @@ body, html {
 }
 
 #container-autocheck {
-  margin-top: -30px;
+  margin-top: 0px;
   text-align: center;
   transform: translateY(50px);
   font-family: 'Oxygen', sans-serif;
