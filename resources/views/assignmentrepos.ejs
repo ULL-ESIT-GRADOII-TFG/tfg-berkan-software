@@ -58,14 +58,14 @@
                               <img src="<%= orgAvatar %>" class="img-responsive"  style=" height:35px;">
                             </div>
                             <div class="col-lg-2">
-                              <h5> alu0100815733 </h5>
+                              <h5> <%= repos[i].name.split("alu").pop() %> </h5>
                             </div>
                             <div class="col-lg-3">
                                 <a class="" role="button" onclick="openRepo('<%= repos[i].name %>', '<%= orgName %>')"><h4> <%= repos[i].name %> </h4></a>
                             </div>
                             <div class="col-lg-3">
                               <a class="" role="button" onclick="openTravis('<%= repos[i].name %>', '<%= orgName %>')">
-                                <img src=<%= "https://travis-ci.org/ULL-ESIT-GRADOII-TFG/"+repos[i].name+".svg?branch=master"%> class="img-responsive"  style="">
+                                <img src=<%= "https://travis-ci.com/"+orgName+"/"+repos[i].name+".svg?token=4bxTspp6bziFqEzUesyb&branch=master"%> class="img-responsive"  style="">
                               </a>
                             </div>
                             <div class="col-lg-1">
