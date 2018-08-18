@@ -1,5 +1,6 @@
 {
   "name": "AutoCheck for GhClassRooms",
+  "productName": "AutoCheck",
   "version": "1.0.0",
   "description": "Repository that contains the software of Berkan's Final Proyect.",
   "main": "main.js",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan/#readme",
   "devDependencies": {
     "electron": "^1.8.3",
+    "electron-packager": "^12.1.0",
     "standard": "^11.0.1"
   },
   "dependencies": {
