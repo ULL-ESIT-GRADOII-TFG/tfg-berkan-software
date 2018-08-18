@@ -7,5 +7,5 @@ function openRepo(repoName, orgName) {
 }
 
 function openTravis(repoName, orgName) {
-  electron.shell.openExternal('https://travis-ci.org/'+orgName+'/'+repoName)
+  electron.shell.openExternal('https://travis-ci.com/'+orgName+'/'+repoName)
 }
