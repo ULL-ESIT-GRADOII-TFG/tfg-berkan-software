@@ -229,7 +229,7 @@ ipcMain.on('render-assignments', (event, arg) => {
 })
  
  
-/* Function called from ipc.renderer to create org assignments. */
+/* Function called from ipc.renderer to create org assignment. */
 ipcMain.on('render-newassignment', (event, arg) => {
   let assignments = {
     assignments: []
@@ -248,7 +248,7 @@ ipcMain.on('render-newassignment', (event, arg) => {
 })
 
 
-/* Function called from ipc.renderer to delete org assignments. */
+/* Function called from ipc.renderer to delete org assignment. */
 ipcMain.on('render-deleteassignment', (event, arg) => {
   let assignments = {
     assignments: []
@@ -310,6 +310,46 @@ ipcMain.on('render-searchrepos', (event, arg) => {
 })
 
 
+/* Function called from ipc.renderer to filter assignment repos. */
+ipcMain.on('render-filterrepos', (event, arg) => {  
+  let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
+  let user = JSON.parse(rawdata);
+  
+  ghUser = new GithubApiFunctions(user.access_token)
+  let result = ghUser.paginate(arg[2])
+  
+  .then(data => {
+    let repos = {
+      repos: []
+    };
+    let reposfiltered = {
+      reposfiltered: []
+    };
+        
+    // Filter repos by RegExp
+    var regex = new RegExp(arg[1], 'g');
+
+    for (var i = 0; i < Object.keys(data).length; i++) {
+      var orgrepos_filter = data[i].name.match(regex);
+      if (orgrepos_filter != null) {
+        repos.repos.push(data[i])
+      }
+    }  
+    
+    regex = new RegExp(arg[4], 'g');
+
+    for (var i = 0; i < Object.keys(repos.repos).length; i++) {
+      var orgrepos_filter = repos.repos[i].name.match(regex);
+      if (orgrepos_filter != null) {
+        reposfiltered.reposfiltered.push(repos.repos[i])
+      }
+    }    
+
+    viewRenderer.load(win, 'assignmentrepos', {orgName: arg[2], orgAvatar: arg[3], assignmentName: arg[0], assignmentRegex: arg[1], repos: reposfiltered.reposfiltered})
+  })
+})
+
+
 /* Function called from ipc.renderer to render assignment repos. */
 ipcMain.on('render-assignment-repos', (event, arg) => {
   let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
@@ -317,7 +357,6 @@ ipcMain.on('render-assignment-repos', (event, arg) => {
   
   ghUser = new GithubApiFunctions(user.access_token)
   let result = ghUser.paginate(arg[2])
-  //let result = ghUser.orgRepos(arg[2])
   
   .then(data => {
     let repos = {
