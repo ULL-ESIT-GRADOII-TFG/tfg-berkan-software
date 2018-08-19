@@ -56,6 +56,7 @@ function createWindow () {
     height: 800,
     minWidth: 1281,
     minHeight: 800,
+    backgroundColor: '#2e2c29',
     icon: path.join(__dirname, 'resources/assets/img/Logo_64x64.png')
   })
 
@@ -184,6 +185,33 @@ ipcMain.on('render-orgs', (event, arg) => {
   result.then(({data, headers, status}) => {
     viewRenderer.load(win, 'orgs', {orgs: data})
   })  
+})
+
+
+/* Function called from ipc.renderer to search orgs. */
+ipcMain.on('render-searchorgs', (event, arg) => {  
+  let rawdata = fs.readFileSync(homedir+'/.autocheck/token.json');  
+  let user = JSON.parse(rawdata); 
+  
+  // Call octokit function to get user organizations.
+  ghUser = new GithubApiFunctions(user.access_token)
+  let result = ghUser.userOrgs()
+  
+  result.then(({data, headers, status}) => {
+        
+    // Filter orgs by RegExp
+    let regex = new RegExp(arg[0], 'g');
+    var orgs = []
+    
+    for (var i = 0; i < Object.keys(data).length; i++) {
+      var org_filter = data[i].login.match(regex);
+      if (org_filter != null) {
+        orgs.push(data[i])
+      }
+    }   
+    
+    viewRenderer.load(win, 'orgs', {orgs: orgs})
+  })
 })
 
 
