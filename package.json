@@ -8,12 +8,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron main.js"
   },
-  "repositorio": {
-    "tipo": "git",
-    "url": " git + https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan-software"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan-software.git"
   },
-  "author": "",
-  "license": "GNU",
+  "author": "Berkan Reyes Hernández",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ULL-ESIT-GRADOII-TFG/tfg-berkan/issues"
   },
