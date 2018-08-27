@@ -17,5 +17,4 @@ function newAssignment (orgName, orgAvatar) {
   } else {
     ipcRender.send('render-newassignment', [orgName, assignmentName, assignmentRegex, orgAvatar])
   }
-
 }
